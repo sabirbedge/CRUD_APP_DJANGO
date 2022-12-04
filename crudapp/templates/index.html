@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CRUD IN DJANGO</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!--<link rel="stylesheet" href="static '/css/mysyle.css' ">-->
+</head>
+<body style="background-color:lightgray">
+</br>
+ <!-- Modal -->
+ <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Employee Details</h4>
+      </div>
+      <div class="modal-body">
+        <form method='post' action='/back/'>
+          {% csrf_token %}
+          <input type='hidden' name='optype' value='add'/>
+        <input type='text' name='nm' class='form-control' placeholder='Enter Name'> <br>
+        <textarea name='add' class='form-control' placeholder='Enter Address'></textarea><br>
+        <input type='submit' class='btn btn-success' value='Add'>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Ended -->
+    <center><h3> CRUD Application In Django</h3></center></br>
+    <button class="btn btn-info"style='margin-left:100px' data-toggle="modal" data-target="#myModal">Add Employee Data</button></br></br>
+    <div class='row'>
+      <div class='col-sm-2'></div>
+      <div class='col-sm-8'>
+    <table class='table table-bordered bg-success text-white'>
+      <thead>
+      <tr class='bg-primary'>
+        <b>
+        <td>Emp_ID</td>
+        <td>Emp_Name</td>
+        <td>Emp_Address</td>
+        <td>Actions</td>
+        </b>
+      </tr>
+    </thead>
+    <tbody>
+        {% for x in members %}
+        <tr>
+        <td>{{x.id}}</td>
+        <td>{{x.nm}}</td>
+        <td>{{x.add}}</td>
+        <td>
+          <span>
+          <a href="/update/{{x.id}}" class='text-success'>
+            <span class="glyphicon glyphicon-edit"></span>
+          </a>  <a href="/deleteData/{{x.id}}"  class='text-danger'>
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </span>
+      </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+  </div>
+    <div class='col-sm-2'></div>
+  </div>
+  
+</body>
+</html>
